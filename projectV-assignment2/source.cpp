@@ -4,13 +4,21 @@
 #include <string>
 
 using namespace std;
-//step 4
+
+#ifdef _DEBUG
+#define LOG(x) std::cout << "MACRO: " << x << endl;
+#else
+#define LOG(x)
+#endif // _DEBUG
+
+
 struct STUDENT_DATA { // Structure to hold student data
     string FirstName;
     string LastName;
 };
 
 int main() {
+
     ifstream StudentDataFile("StudentData.txt"); // Open the StudentData file
     if (!StudentDataFile) { // Check to see if the file had error opening
         cout << "Error opening the file." << endl;
@@ -40,10 +48,13 @@ int main() {
 
     StudentDataFile.close(); // Close the file
 
+#ifdef _DEBUG
+    cout << "DEBUG Running" << endl;
     // Print the student data vector space
     for (const STUDENT_DATA& student : studentVector) {
-        cout << "Last Name: " << student.LastName << ", First Name: " << student.FirstName << endl;
+         cout << "Last Name: " << student.LastName << ", First Name: " << student.FirstName << endl;
     }
-
+#endif
+   
     return 0;
 }
