@@ -28,6 +28,12 @@ struct STUDENT_DATA { // Structure to hold student data
 
 int main() {
 
+#ifdef PRE_RELEASE
+
+    cout << "PRE RELEASE Running" << endl;
+#else
+    cout << "STANDARD Running" << endl;
+#endif
     ifstream StudentDataFile(DataFileName); // Open the StudentData file
     if (!StudentDataFile) { // Check to see if the file had error opening
         cout << "Error opening the file." << endl;
@@ -44,6 +50,7 @@ int main() {
         size_t commaPos = Line.find(','); // Format the page for the comma seperating the names
 
 #ifdef PRE_RELEASE
+
         size_t commaPos2 = Line.find(',', commaPos + 1);
 #endif
         if (commaPos == string::npos) { // Check to see if the line on the file does not have a comma
@@ -70,8 +77,8 @@ int main() {
     StudentDataFile.close(); // Close the file
     LineNum = 0;
 
+#ifdef _DEBUG
 #ifdef PRE_RELEASE
-    cout << "PRE_RELEASE Running" << endl;
     // Print the student data vector space
     for (const STUDENT_DATA& student : studentVector) {
         cout << "Last Name: " << student.LastName << ", First Name: " << student.FirstName << ", Email: " << student.Email << endl;
@@ -83,7 +90,7 @@ int main() {
     for (const STUDENT_DATA& student : studentVector) {
         cout << "Last Name: " << student.LastName << ", First Name: " << student.FirstName << endl;
     }
-
+#endif
 #endif
    
     return 0;
