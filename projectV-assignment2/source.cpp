@@ -4,7 +4,7 @@
 #include <string>
 
 using namespace std;
-
+//step 4
 struct STUDENT_DATA { // Structure to hold student data
     string FirstName;
     string LastName;
